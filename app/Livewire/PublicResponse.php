@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
 use App\Models\Message;
 use Livewire\Attributes\On; 
-  
+use Illuminate\Support\ItemNotFoundException;
+
 
 class PublicResponse extends Component
 {
-
 
 
 
@@ -44,7 +44,9 @@ class PublicResponse extends Component
 
    #[Computed]
    public function seen()
-   {
+   {  
+
+    try {
 
 
 
@@ -52,14 +54,17 @@ class PublicResponse extends Component
 ->where('auth',false)
 ->where('replied',false)
 ->firstOrFail()
-->id;
+;  } 
+catch 
+    (ItemNotFoundException $ex) {
+    dd($ex); }
 
 
 //->orderBy('id','desc')->first()->id;
 
 
 
-     return $user;
+     return $user->id;
     
 
 
@@ -181,6 +186,7 @@ Db::table('messages')
        //return DB::table('messages')->select('message')->get();
        
         //dd($dc);
+
 
 
     }

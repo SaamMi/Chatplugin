@@ -6,7 +6,7 @@
                 
                      
                      
-                    unanswered messages : {{$this->unanswered}}
+                    unanswered messages : 
                      
                      
                     
