@@ -1,6 +1,6 @@
 
 
-
+<div x-data="chat">
 
 
 {{--($userName = request()->cookie('user_name'))
@@ -19,7 +19,25 @@
               <div class="flex items-center h-screen">
                 <div class="w-3/5"> content... </div>
                 <div class="w-1/5 h-screen">
-                
+             
+
+             <div>
+            <template
+                x-for= "message in messages">
+                    
+<div>
+    <span x-html="message.message">
+    </span>
+
+
+
+
+</div>
+
+
+
+             </template>       
+        </div>       
              
              
                 <div class="overflow-y-auto">
@@ -81,7 +99,29 @@
         </div>
     </div>
 </div>
+<script>
 
+
+document.addEventListener("alpine:init", async () => {
+        const channel = Echo.join("chat-room");
+
+        Alpine.data("chat", () => ({
+            message: "",
+            messages: [],
+
+            async init() {
+                await channel.here
+            
+
+
+
+
+
+
+
+</script>
+
+</div>
 
 
 

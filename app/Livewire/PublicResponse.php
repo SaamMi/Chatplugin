@@ -8,7 +8,7 @@ use Livewire\Attributes\Computed;
 use App\Models\Message;
 use Livewire\Attributes\On; 
 use Illuminate\Support\ItemNotFoundException;
-
+use Throwable;
 
 class PublicResponse extends Component
 {
@@ -56,8 +56,10 @@ class PublicResponse extends Component
 ->firstOrFail()
 ;  } 
 catch 
-    (ItemNotFoundException $ex) {
-    dd($ex); }
+    (Throwable $e) {
+
+        report($e);
+    return "nothing" ; }
 
 
 //->orderBy('id','desc')->first()->id;
@@ -78,16 +80,22 @@ catch
    public function cv()
    {
 
-
+try{
 
      $user = DB::table('messages')
      ->where('auth',false)
 ->where('replied',false)
-->orderBy('id','desc')->first()->cookievalue;
+->orderBy('id','desc')->firstOrFail();
+}
+catch (ItemNotFoundException $ex)
+{
 
 
+     dd($ex);
+ }
 
-     return $user;
+
+ return $user->cookievalue;
 
 
 
