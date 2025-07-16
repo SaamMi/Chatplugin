@@ -9,6 +9,7 @@ use App\Models\Message;
 use Livewire\Attributes\On; 
 use Illuminate\Support\ItemNotFoundException;
 use Throwable;
+use App\Events\NewMessage;
 
 class PublicResponse extends Component
 {
@@ -153,6 +154,10 @@ Db::table('messages')
         ->where('id','=',$this->seen)
         ->update(['replied'=>true]); 
 
+
+        NewMessage::dispatch($message);
+
+.      
     //Message::where('id',$
 
 
@@ -160,6 +165,9 @@ Db::table('messages')
 
        /* Auth::user()
             ->messages()
+
+
+
             ->create([
                 'message' => $this->transform($this->message),
             ]); */

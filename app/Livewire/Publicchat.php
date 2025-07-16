@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
+use App\Events\NewMessage;
   
 class Publicchat extends Component
 {
@@ -55,6 +56,11 @@ class Publicchat extends Component
             'replied'=>false,
             'auth'=>false,
         ]);
+
+       
+        NewMessage::dispatch($message);
+
+
 
        /* Auth::user()
             ->messages()
