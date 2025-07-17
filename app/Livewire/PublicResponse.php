@@ -156,8 +156,9 @@ Db::table('messages')
 
 
         NewMessage::dispatch($message);
+  
 
-.      
+      
     //Message::where('id',$
 
 
