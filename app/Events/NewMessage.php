@@ -22,7 +22,7 @@ class NewMessage implements ShouldBroadcast
      public Message $message
     )
     {
-        //
+        //dd($message);
     }
 
     /**
@@ -33,7 +33,7 @@ class NewMessage implements ShouldBroadcast
     public function broadcastOn(): Channel
     {
         return 
-            new Channel('messages.'$this->message->cookievalue);
+            new Channel('messages.'.$this->message->cookievalue);
         
     }
 }

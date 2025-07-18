@@ -6,6 +6,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
 use App\Events\NewMessage;
+use App\Models\Message;
   
 class Publicchat extends Component
 {
@@ -49,16 +50,24 @@ class Publicchat extends Component
     public function sendMessage(): void
     {
        
-        Db::table('messages')->insert([
+        /* Db::table('messages')->insert([
 
             'message'=> $this->message,
             'cookievalue'=> $this->cookieValue,
             'replied'=>false,
             'auth'=>false,
-        ]);
+        ])  */
 
-       
-        NewMessage::dispatch($message);
+      $eventmessage=  Message::create([
+         'message'=> $this->message,
+            'cookievalue'=> $this->cookieValue,
+            'replied'=>false,
+            'auth'=>false,
+          ]);
+
+      /* $eventmessage= Message::where('replied',0)
+       ->last();  */
+        NewMessage::dispatch($eventmessage);
 
 
 
