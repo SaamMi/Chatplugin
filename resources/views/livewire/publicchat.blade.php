@@ -23,10 +23,10 @@
 
              <div>
             <template
-                x-for= "message in messages">
+                
                     
 <div>
-    <span x-html="message.message">
+    <span>
     </span>
 
 
@@ -42,6 +42,7 @@
              
                 <div class="overflow-y-auto">
             <ul class="ml-12 space-y-4">
+
                 messages
             
               {{$this->msg}}
@@ -102,15 +103,12 @@
 <script>
 
 
-document.addEventListener("alpine:init", async () => {
-        const channel = Echo.join("chat-room");
+console.log('message..')
 
-        Alpine.data("chat", () => ({
-            message: "",
-            messages: [],
-
-            async init() {
-                await channel.here
+         Echo.channel(`messages.${this.message.cookievalue}`)
+    .listen('NewMessage', (e) => {
+        console.log(e.message.message);
+    });
             
 
 
@@ -120,6 +118,7 @@ document.addEventListener("alpine:init", async () => {
 
 
 </script>
+
 
 </div>
 

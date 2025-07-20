@@ -33,7 +33,8 @@ class NewMessage implements ShouldBroadcast
     public function broadcastOn(): Channel
     {
         return 
-            new Channel('messages.'.$this->message->cookievalue);
+            new PrivateChannel('messages.'.$this->message->cookievalue);
+            
         
     }
 }
